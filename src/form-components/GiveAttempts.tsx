@@ -29,15 +29,13 @@ export function GiveAttempts(): React.JSX.Element {
             <Form.Group controlId="formAttemptsWanted">
                 <Form.Label>Enter Wanted Attempts:</Form.Label>
                 <Form.Control
-                    type="text"
+                    type="number"
                     placeholder="Enter answer"
                     onChange={(e) => {
-                        if ((e.target as HTMLInputElement).value === "") {
-                            setAttemptsWanted(0);
+                        if (e.target.value === "") {
+                            setAttemptsWanted(attempts);
                         } else {
-                            setAttemptsWanted(
-                                parseInt((e.target as HTMLInputElement).value),
-                            );
+                            setAttemptsWanted(parseInt(e.target.value));
                         }
                     }}
                 />
