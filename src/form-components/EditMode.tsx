@@ -3,7 +3,6 @@ import { Form } from "react-bootstrap";
 
 export function EditMode(): React.JSX.Element {
     const [isEdit, setIsEdit] = useState<boolean>(false);
-    const [noEditStudent] = useState<string>("");
     const [studentName, setStudentName] = useState<string>("Your Name");
     const [isStudent, setIsStudent] = useState<boolean>(true);
 
@@ -19,7 +18,30 @@ export function EditMode(): React.JSX.Element {
 
     return (
         <div>
-            <h3>Edit Mode</h3>
+            <div>
+                {studentName}{" "}
+                <span>{isStudent ? "is a student" : "is not a student"}</span>
+            </div>
+            {isEdit && (
+                <Form.Group controlId="no-edit-student">
+                    <Form.Label>Student Name</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Enter student name"
+                        value={studentName}
+                        onChange={(e) => {
+                            setStudentName(e.target.value);
+                        }}
+                    />
+                    <Form.Label>Is A Student</Form.Label>
+                    <Form.Check
+                        type="checkbox"
+                        id="is-student-check"
+                        checked={isStudent}
+                        onChange={updateStudentStatus}
+                    />
+                </Form.Group>
+            )}
             <Form.Check
                 type="switch"
                 id="edit-mode-switch"
@@ -27,31 +49,6 @@ export function EditMode(): React.JSX.Element {
                 checked={isEdit}
                 onChange={updateMode}
             />
-            <Form.Group controlId="no-edit-student">
-                <Form.Label>Student Name</Form.Label>
-                <Form.Control
-                    type="text"
-                    placeholder="Enter student name"
-                    value={noEditStudent}
-                    onChange={(e) => {
-                        if (isEdit) {
-                            setStudentName(e.target.value);
-                        }
-                        setStudentName(e.target.value);
-                    }}
-                    disabled={!isEdit}
-                />
-                <Form.Control
-                    type="checkbox"
-                    checked={isStudent}
-                    onChange={updateStudentStatus}
-                    disabled={!isEdit}
-                />
-            </Form.Group>
-            <span>{isEdit ? "Edit Mode" : "View Mode"}</span>
-            <div>
-                {studentName} <span>{}</span>
-            </div>
         </div>
     );
 }
