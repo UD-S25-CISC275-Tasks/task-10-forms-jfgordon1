@@ -19,8 +19,13 @@ export function EditMode(): React.JSX.Element {
     return (
         <div>
             <div>
-                {studentName}{" "}
-                <span>{isStudent ? "is a student" : "is not a student"}</span>
+                {!isEdit && (
+                    <p>
+                        {isStudent ?
+                            <span>{studentName} is a student</span>
+                        :   <span>{studentName} is not a student</span>}
+                    </p>
+                )}
             </div>
             {isEdit && (
                 <Form.Group controlId="no-edit-student">
@@ -35,8 +40,9 @@ export function EditMode(): React.JSX.Element {
                     />
                     <Form.Label>Is A Student</Form.Label>
                     <Form.Check
+                        label="student"
                         type="checkbox"
-                        id="is-student-check"
+                        id="student"
                         checked={isStudent}
                         onChange={updateStudentStatus}
                     />

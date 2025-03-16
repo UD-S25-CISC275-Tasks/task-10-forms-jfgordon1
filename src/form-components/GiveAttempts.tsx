@@ -9,7 +9,7 @@ export function GiveAttempts(): React.JSX.Element {
         if (attemptsWanted < 0) {
             return;
         }
-        setAttempts(attemptsWanted);
+        setAttempts(attemptsWanted + attempts);
     }
     return (
         <div>
@@ -30,7 +30,7 @@ export function GiveAttempts(): React.JSX.Element {
                 <Form.Label>Enter Wanted Attempts:</Form.Label>
                 <Form.Control
                     type="number"
-                    placeholder="Enter answer"
+                    placeholder="Enter attempts"
                     onChange={(e) => {
                         if (e.target.value === "") {
                             setAttemptsWanted(attempts);
