@@ -11,8 +11,17 @@ const COLORS = [
     "pink",
     "orange",
 ];
+
 export function ChangeColor(): React.JSX.Element {
-    const [color, setColor] = useState<string>();
+    const [colorSelection, setColor] = useState<string>("red");
+
+    /*function updateColor(event: React.ChangeEvent<HTMLInputElement>) {
+        setColor(event.target.value);
+    }/*
+
+    /*function checkColor(inputColor: string, checkedColor: string) {
+        return inputColor === checkedColor;
+    }*/
     return (
         <div>
             <div></div>
@@ -24,23 +33,29 @@ export function ChangeColor(): React.JSX.Element {
                             inline
                             type="radio"
                             name={color}
+                            id={color}
                             key={color}
                             label={color}
-                            onChange={() => {
-                                setColor(color);
-                            }}
                             value={color}
-                            checked={color === color}
-                        >
-                            {color}
-                        </Form.Check>
+                            onChange={(e) => {
+                                setColor(e.target.value);
+                            }}
+                            style={{ backgroundColor: color }}
+                            checked={color === colorSelection}
+                        />
                     );
                 })}
             </span>
             <p>
                 {" "}
                 the text is{" "}
-                <span style={{ backgroundColor: color }}> {color}</span>
+                <span
+                    data-testid="colored-box"
+                    style={{ backgroundColor: colorSelection }}
+                >
+                    {" "}
+                    {colorSelection}
+                </span>
             </p>
         </div>
     );
